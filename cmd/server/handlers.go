@@ -7,6 +7,8 @@ import (
 )
 
 func registerAllHandlers(e *echo.Echo) {
+	// TODO: initialize databases, loggers, configuration files and more
+
 	userRepository := repository.NewUserRepository()
 	userHandler := user.NewHandler(userRepository)
 	userHandler.RegisterRoutes("/users", e)
