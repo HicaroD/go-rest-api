@@ -13,6 +13,10 @@ type GetUserByIdRequestBody struct {
 }
 
 func GetUserByIdController(ctx echo.Context) error {
+	// TODO: it would be awesome to extract all necessary
+	// informations from the request (param, query, body and more)
+	// in one single command
+
 	req := &GetUserByIdRequestBody{
 		ID: ctx.Param("id"),
 	}
