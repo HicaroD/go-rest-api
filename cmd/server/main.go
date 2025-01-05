@@ -1,6 +1,9 @@
 package main
 
 import (
+	"fmt"
+
+	"github.com/HicaroD/learnanything-api/config"
 	"github.com/labstack/echo/v4"
 )
 
@@ -9,8 +12,12 @@ func main() {
 }
 
 func Start() {
+	cfg := config.InitEnvConfig()
+
 	e := echo.New()
 	registerDefaultMiddlewares(e)
 	registerAllHandlers(e)
-	e.Logger.Fatal(e.Start(":8080"))
+
+	addr := fmt.Sprintf(":%v", cfg.Port)
+	e.Logger.Fatal(e.Start(addr))
 }

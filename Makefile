@@ -59,6 +59,10 @@ deps:
 generate:
 	$(GO) generate ./...
 
+.PHONY: env
+env:
+	direnv allow .
+
 # Help menu
 .PHONY: help
 help:

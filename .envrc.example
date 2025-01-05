@@ -1,0 +1,6 @@
+# This in an example file
+#
+# Install 'direnv' package and run 'direnv allow .' in order to load
+# all the environment variables
+
+PORT=

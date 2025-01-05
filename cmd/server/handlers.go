@@ -1,15 +1,15 @@
 package main
 
 import (
-	"github.com/HicaroD/learnanything-api/services/user"
-	"github.com/HicaroD/learnanything-api/services/user/repository"
+	userH "github.com/HicaroD/learnanything-api/internal/user/controllers"
+	"github.com/HicaroD/learnanything-api/internal/user/service"
 	"github.com/labstack/echo/v4"
 )
 
 func registerAllHandlers(e *echo.Echo) {
 	// TODO: initialize databases, loggers, configuration files and more
 
-	userRepository := repository.NewUserRepository()
-	userHandler := user.NewHandler(userRepository)
-	userHandler.RegisterRoutes("/users", e)
+	userRepository := service.NewUserService()
+	userHandler := userH.NewHandler(userRepository)
+	userHandler.RegisterControllers("/users", e)
 }
