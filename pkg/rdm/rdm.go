@@ -54,7 +54,7 @@ type Database struct {
 	Conn *gorm.DB
 }
 
-// Connect initializes the database connection
+// Initializes the database connection
 func Connect(config DatabaseConfig) (*Database, error) {
 	db := &Database{}
 
@@ -81,7 +81,15 @@ func Connect(config DatabaseConfig) (*Database, error) {
 	return db, nil
 }
 
-// buildDSN constructs the DSN string based on the configuration
+// Automigrate any number of models
+func (db *Database) AutoMigrate(models ...interface{}) error {
+	if db.Conn == nil {
+		return fmt.Errorf("database is not connected")
+	}
+	return db.Conn.AutoMigrate(models...)
+}
+
+// Constructs the DSN string based on the configuration
 func buildDSN(config DatabaseConfig) (string, error) {
 	switch config.Driver {
 	case DRIVER_SQLITE:
@@ -97,9 +105,3 @@ func buildDSN(config DatabaseConfig) (string, error) {
 	}
 }
 
-func (db *Database) AutoMigrate(models ...interface{}) error {
-	if db.Conn == nil {
-		return fmt.Errorf("database is not connected")
-	}
-	return db.Conn.AutoMigrate(models...)
-}
