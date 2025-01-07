@@ -1,4 +1,4 @@
-module github.com/HicaroD/learnanything-api
+module github.com/HicaroD/api
 
 go 1.23.4
 

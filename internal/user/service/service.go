@@ -1,6 +1,6 @@
 package service
 
-import "github.com/HicaroD/learnanything-api/internal/user/entity"
+import "github.com/HicaroD/api/internal/user/entity"
 
 type User interface {
 	CreateUser(user entity.User) (entity.User, error)

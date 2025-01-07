@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/labstack/echo/v4"
 
-	"github.com/HicaroD/learnanything-api/internal/user/service"
+	"github.com/HicaroD/api/internal/user/service"
 )
 
 type Handler struct {
@@ -18,6 +18,6 @@ func (h *Handler) RegisterControllers(prefix string, e *echo.Echo) {
 	g := e.Group(prefix)
 
 	g.GET("/", h.GetAllUsersController)
-	g.POST("/:id", h.GetUserByIdController)
-	g.POST("/",h.CreateUserController)
+	g.GET("/:id", h.GetUserByIdController)
+	g.POST("/", h.CreateUserController)
 }

@@ -3,7 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/HicaroD/learnanything-api/pkg/utils"
+	"github.com/HicaroD/api/pkg/utils"
 	"github.com/labstack/echo/v4"
 )
 

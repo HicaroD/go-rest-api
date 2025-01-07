@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/HicaroD/learnanything-api/config"
+	"github.com/HicaroD/api/config"
 	"github.com/labstack/echo/v4"
 )
 

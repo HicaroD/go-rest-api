@@ -1,8 +1,8 @@
 package main
 
 import (
-	userH "github.com/HicaroD/learnanything-api/internal/user/controllers"
-	"github.com/HicaroD/learnanything-api/internal/user/service"
+	userH "github.com/HicaroD/api/internal/user/controllers"
+	"github.com/HicaroD/api/internal/user/service"
 	"github.com/labstack/echo/v4"
 )
 
