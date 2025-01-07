@@ -3,7 +3,7 @@ package users
 import (
 	"net/http"
 
-	"github.com/HicaroD/api/pkg"
+	"github.com/HicaroD/api/pkg/validators"
 	"github.com/labstack/echo/v4"
 )
 
@@ -14,7 +14,7 @@ type CreateUserRequestBody struct {
 
 func (h *Handler) CreateUserController(ctx echo.Context) error {
 	createUserRequest := CreateUserRequestBody{}
-	err := utils.ValidateRequest(ctx, &createUserRequest)
+	err := validators.ValidateRequest(ctx, &createUserRequest)
 	if err != nil {
 		return err
 	}

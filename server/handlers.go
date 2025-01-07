@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	userH "github.com/HicaroD/api/internal/controllers/users"
@@ -9,12 +9,12 @@ import (
 
 func registerAllHandlers(e *echo.Echo) error {
 	// TODO: initialize databases, loggers, configuration files and more
+
 	dbConfig := rdm.InitSqliteConfig("local.db")
 	localDb, err := rdm.Connect(dbConfig)
 	if err != nil {
 		return err
 	}
-
 	e.Logger.Printf("localDb: %p\n", localDb)
 
 	userService := users.NewService()

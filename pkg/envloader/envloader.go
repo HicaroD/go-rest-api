@@ -1,4 +1,4 @@
-package utils
+package envloader
 
 import (
 	"os"
@@ -11,7 +11,7 @@ import (
 // The idea is to be really simple because environment
 // variables are generally strings or integers
 
-func EnvGetInt(key string, fallback int) int {
+func GetInt(key string, fallback int) int {
 	valStr, set := os.LookupEnv(key)
 	if !set {
 		return fallback
@@ -25,7 +25,7 @@ func EnvGetInt(key string, fallback int) int {
 	return val
 }
 
-func EnvGetString(key string, fallback string) string {
+func GetString(key string, fallback string) string {
 	val, set := os.LookupEnv(key)
 	if !set {
 		return fallback

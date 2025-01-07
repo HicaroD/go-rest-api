@@ -1,6 +1,6 @@
 package config
 
-import "github.com/HicaroD/api/pkg"
+import "github.com/HicaroD/api/pkg/envloader"
 
 // NOTE: "direnv" package is used for loading environment variables
 
@@ -10,6 +10,6 @@ type EnvConfig struct {
 
 func InitEnvConfig() EnvConfig {
 	return EnvConfig{
-		Port: utils.EnvGetInt("PORT", 8080),
+		Port: envloader.GetInt("PORT", 8080),
 	}
 }

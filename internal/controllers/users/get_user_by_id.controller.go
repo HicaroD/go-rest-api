@@ -3,7 +3,7 @@ package users
 import (
 	"net/http"
 
-	"github.com/HicaroD/api/pkg"
+	"github.com/HicaroD/api/pkg/validators"
 	"github.com/labstack/echo/v4"
 )
 
@@ -13,7 +13,7 @@ type GetUserByIdRequestBody struct {
 
 func (h *Handler) GetUserByIdController(ctx echo.Context) error {
 	req := &GetUserByIdRequestBody{}
-	err := utils.ValidateRequest(ctx, req)
+	err := validators.ValidateRequest(ctx, req)
 	if err != nil {
 		return err
 	}
