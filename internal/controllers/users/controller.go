@@ -1,17 +1,13 @@
-package controllers
+package users
 
 import (
 	"github.com/labstack/echo/v4"
 
-	"github.com/HicaroD/api/internal/user/service"
+	"github.com/HicaroD/api/internal/services/users"
 )
 
 type Handler struct {
-	userService service.User
-}
-
-func NewHandler(userService service.User) *Handler {
-	return &Handler{userService}
+	UserService users.UserService
 }
 
 func (h *Handler) RegisterControllers(prefix string, e *echo.Echo) {

@@ -1,8 +1,8 @@
-package service
+package users
 
-import "github.com/HicaroD/api/internal/user/entity"
+import "github.com/HicaroD/api/internal/entity"
 
-type User interface {
+type UserService interface {
 	CreateUser(user entity.User) (entity.User, error)
 }
 
@@ -11,6 +11,6 @@ type User interface {
 type user struct{}
 
 // CreateUser implements UserRepository.
-func NewUserService() User {
+func NewService() UserService {
 	return &user{}
 }

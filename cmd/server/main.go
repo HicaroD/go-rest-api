@@ -15,8 +15,13 @@ func Start() {
 	cfg := config.InitEnvConfig()
 
 	e := echo.New()
+
 	registerDefaultMiddlewares(e)
-	registerAllHandlers(e)
+
+	err := registerAllHandlers(e)
+	if err != nil {
+		e.Logger.Fatal(err)
+	}
 
 	addr := fmt.Sprintf(":%v", cfg.Port)
 	e.Logger.Fatal(e.Start(addr))
