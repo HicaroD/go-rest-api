@@ -8,7 +8,6 @@ import (
 
 func registerAllHandlers(e *echo.Echo) {
 	// TODO: initialize databases, loggers, configuration files and more
-
 	userRepository := service.NewUserService()
 	userHandler := userH.NewHandler(userRepository)
 	userHandler.RegisterControllers("/users", e)

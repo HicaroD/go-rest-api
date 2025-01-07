@@ -1,6 +1,6 @@
 package config
 
-import "github.com/HicaroD/api/pkg/utils"
+import "github.com/HicaroD/api/pkg"
 
 // NOTE: "direnv" package is used for loading environment variables
 
