@@ -1,8 +1,9 @@
 package server
 
 import (
-	userH "github.com/HicaroD/api/internal/controllers/users"
-	"github.com/HicaroD/api/internal/services/users"
+	usersH "github.com/HicaroD/api/internal/controllers/users"
+	"github.com/HicaroD/api/internal/entity/db"
+	usersS "github.com/HicaroD/api/internal/services/users"
 	"github.com/HicaroD/api/pkg/rdm"
 	"github.com/labstack/echo/v4"
 )
@@ -15,10 +16,14 @@ func registerAllHandlers(e *echo.Echo) error {
 	if err != nil {
 		return err
 	}
+	err = localDb.AutoMigrate(&db.User{})
+	if err != nil {
+		return err
+	}
 	e.Logger.Printf("localDb: %p\n", localDb)
 
-	userService := users.NewService()
-	userHandler := &userH.Handler{UserService: userService}
+	userService := usersS.NewService(localDb)
+	userHandler := &usersH.Handler{UserService: userService}
 	userHandler.RegisterControllers("/users", e)
 
 	return nil

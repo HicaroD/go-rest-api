@@ -10,6 +10,7 @@
 
 - [ ] Makefile for all commands
 - [ ] Hot reloading with Air
+- [ ] Docker-based
 
 ### Architecture
 

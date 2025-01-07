@@ -1,16 +1,19 @@
 package users
 
-import "github.com/HicaroD/api/internal/entity"
+import (
+	"github.com/HicaroD/api/internal/entity/business"
+	"github.com/HicaroD/api/pkg/rdm"
+)
 
 type UserService interface {
-	CreateUser(user entity.User) (entity.User, error)
+	GetUserById(id uint) (*business.User, bool, error)
+	CreateUser(user business.User) (business.User, error)
 }
 
-// TODO: inject any dependency here for the user service, such as database
-// connection, caching
-type user struct{}
+type user struct {
+	localDb *rdm.Database
+}
 
-// CreateUser implements UserRepository.
-func NewService() UserService {
-	return &user{}
+func NewService(localDb *rdm.Database) UserService {
+	return &user{localDb}
 }

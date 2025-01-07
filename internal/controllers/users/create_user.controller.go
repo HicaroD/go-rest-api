@@ -3,6 +3,7 @@ package users
 import (
 	"net/http"
 
+	"github.com/HicaroD/api/internal/entity/business"
 	"github.com/HicaroD/api/pkg/validators"
 	"github.com/labstack/echo/v4"
 )
@@ -12,14 +13,25 @@ type CreateUserRequestBody struct {
 	LastName string `json:"last_name"  validate:"required"`
 }
 
+func (r CreateUserRequestBody) toUser() business.User {
+	return business.User{
+		Name:     r.Name,
+		LastName: r.LastName,
+	}
+}
+
 func (h *Handler) CreateUserController(ctx echo.Context) error {
-	createUserRequest := CreateUserRequestBody{}
-	err := validators.ValidateRequest(ctx, &createUserRequest)
+	req := CreateUserRequestBody{}
+	err := validators.ValidateRequest(ctx, &req)
 	if err != nil {
 		return err
 	}
 
-	// TODO: call some sort of service here
+	user := req.toUser()
+	newUser, err := h.UserService.CreateUser(user)
+	if err != nil {
+		return err
+	}
 
-	return ctx.JSON(http.StatusCreated, map[string]string{"Hello from": "CreateUserController"})
+	return ctx.JSON(http.StatusCreated, map[string]any{"user": newUser.ToJson()})
 }
