@@ -6,7 +6,7 @@ import (
 )
 
 func ValidateRequest(ctx echo.Context, req any) error {
-	if err := ctx.Bind(&req); err != nil {
+	if err := ctx.Bind(req); err != nil {
 		return err
 	}
 

@@ -8,16 +8,11 @@ import (
 )
 
 type GetUserByIdRequestBody struct {
-	ID   string `validate:"required"`
+	ID string `param:"id" validate:"required"`
 }
 
 func (h *Handler) GetUserByIdController(ctx echo.Context) error {
-	// TODO: it would be awesome to extract all necessary
-	// informations from the request (param, query, body and more)
-	// in one single command
-	req := &GetUserByIdRequestBody{
-		ID: ctx.Param("id"),
-	}
+	req := &GetUserByIdRequestBody{}
 	err := utils.ValidateRequest(ctx, req)
 	if err != nil {
 		return err
