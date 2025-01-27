@@ -9,7 +9,7 @@ func (s *user) CreateUser(user business.User) (business.User, error) {
 	var err error
 
 	newUser := &db.User{Name: user.Name, LastName: user.LastName}
-	result := s.localDb.Conn.Create(newUser)
+	result := s.DB().Create(newUser)
 	err = result.Error
 	if err != nil {
 		return business.User{}, err

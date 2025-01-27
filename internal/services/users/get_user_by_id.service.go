@@ -9,7 +9,7 @@ func (s *user) GetUserById(id uint) (*business.User, bool, error) {
 	user := &db.User{ID: id}
 	found := false
 
-	result := s.localDb.Conn.First(&user, id)
+	result := s.DB().First(&user, id)
 	err := result.Error
 	if err != nil {
 		return nil, found, err

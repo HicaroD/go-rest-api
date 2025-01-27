@@ -33,5 +33,5 @@ func (h *Handler) CreateUserController(ctx echo.Context) error {
 		return err
 	}
 
-	return ctx.JSON(http.StatusCreated, map[string]any{"user": newUser.ToJson()})
+	return ctx.JSON(http.StatusCreated, map[string]any{"user": newUser})
 }

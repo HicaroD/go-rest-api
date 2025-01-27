@@ -3,6 +3,7 @@ package users
 import (
 	"github.com/HicaroD/api/internal/entity/business"
 	"github.com/HicaroD/api/pkg/rdm"
+	"gorm.io/gorm"
 )
 
 type UserService interface {
@@ -16,4 +17,8 @@ type user struct {
 
 func NewService(localDb *rdm.Database) UserService {
 	return &user{localDb}
+}
+
+func (u *user) DB() *gorm.DB {
+	return u.localDb.Conn
 }
