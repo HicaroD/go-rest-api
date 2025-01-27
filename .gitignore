@@ -27,3 +27,6 @@ go.work.sum
 
 # Build
 build
+
+# Local databases
+*.db
