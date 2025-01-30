@@ -65,4 +65,4 @@ the corresponding driver method.
 ## Good practices
 
 1. If you don't need a driver anymore, remove it! Don't install unnecessary
-   packages.
+   packages. (tip: `go mod tidy`)
