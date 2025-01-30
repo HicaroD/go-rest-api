@@ -4,3 +4,6 @@
 # all the environment variables
 
 PORT=
+
+# https://www.mongodb.com/docs/drivers/go/current/usage-examples/#connection-string
+MONGODB_URI=
