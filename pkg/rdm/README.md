@@ -64,5 +64,5 @@ the corresponding driver method.
 
 ## Good practices
 
-1. If you don't need a driver anymore, remove it! Don't install unnecessary
-   packages. (tip: `go mod tidy`)
+1. If you don't need some specific driver, just remove its respective method
+   implementation and. clear all packages (tip: `go mod tidy`)
