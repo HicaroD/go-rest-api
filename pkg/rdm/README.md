@@ -2,8 +2,8 @@
 
 ## Drivers
 
-In order to add a new driver support, you should go to `pkg/rdm/drivers.go` and
-paste the code in the corresponding driver method.
+In order to add a new driver support, go to `drivers.go` and paste the code in
+the corresponding driver method.
 
 ### SQLite
 
@@ -64,5 +64,5 @@ paste the code in the corresponding driver method.
 
 ## Good practices
 
-1. If you don't need a driver anymore, remove
-   it! Don't install unnecessary packages.
+1. If you don't need a driver anymore, remove it! Don't install unnecessary
+   packages.
