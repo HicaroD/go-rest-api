@@ -1,6 +1,6 @@
 package config
 
-import "github.com/HicaroD/api/pkg/envloader"
+import "lego-api-go/pkg/envloader"
 
 // NOTE: "direnv" package is used for loading environment variables
 

@@ -1,8 +1,9 @@
 package users
 
 import (
-	"github.com/HicaroD/api/internal/entity/business"
-	"github.com/HicaroD/api/pkg/rdm"
+	"lego-api-go/internal/entity/business"
+	"lego-api-go/pkg/rdm"
+
 	"gorm.io/gorm"
 )
 

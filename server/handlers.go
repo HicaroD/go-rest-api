@@ -1,10 +1,11 @@
 package server
 
 import (
-	usersH "github.com/HicaroD/api/internal/controllers/users"
-	"github.com/HicaroD/api/internal/entity/db"
-	usersS "github.com/HicaroD/api/internal/services/users"
-	"github.com/HicaroD/api/pkg/rdm"
+	usersH "lego-api-go/internal/controllers/users"
+	"lego-api-go/internal/entity/db"
+	usersS "lego-api-go/internal/services/users"
+	"lego-api-go/pkg/rdm"
+
 	"github.com/labstack/echo/v4"
 )
 

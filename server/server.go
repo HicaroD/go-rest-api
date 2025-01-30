@@ -3,7 +3,8 @@ package server
 import (
 	"fmt"
 
-	"github.com/HicaroD/api/config"
+	"lego-api-go/config"
+
 	"github.com/labstack/echo/v4"
 )
 

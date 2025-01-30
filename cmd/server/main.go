@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/HicaroD/api/server"
+	"lego-api-go/server"
 )
 
 func main() {

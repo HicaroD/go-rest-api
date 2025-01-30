@@ -3,7 +3,7 @@ package users
 import (
 	"github.com/labstack/echo/v4"
 
-	"github.com/HicaroD/api/internal/services/users"
+	"lego-api-go/internal/services/users"
 )
 
 type Handler struct {

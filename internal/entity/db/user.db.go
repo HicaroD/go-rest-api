@@ -5,7 +5,7 @@ import (
 
 	"gorm.io/gorm"
 
-	"github.com/HicaroD/api/internal/entity/business"
+	"lego-api-go/internal/entity/business"
 )
 
 type User struct {

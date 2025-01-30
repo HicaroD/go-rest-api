@@ -3,8 +3,9 @@ package users
 import (
 	"net/http"
 
-	"github.com/HicaroD/api/internal/entity/business"
-	"github.com/HicaroD/api/pkg/validators"
+	"lego-api-go/internal/entity/business"
+	"lego-api-go/pkg/validators"
+
 	"github.com/labstack/echo/v4"
 )
 

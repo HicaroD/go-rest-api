@@ -1,8 +1,8 @@
 package users
 
 import (
-	"github.com/HicaroD/api/internal/entity/business"
-	"github.com/HicaroD/api/internal/entity/db"
+	"lego-api-go/internal/entity/business"
+	"lego-api-go/internal/entity/db"
 )
 
 func (s *user) CreateUser(user business.User) (business.User, error) {
