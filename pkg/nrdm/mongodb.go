@@ -9,21 +9,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-// connectMongoDB initializes the connection for MongoDB.
-// func connectMongoDB(config DatabaseConfig) (*mongo.Client, error) {
-// 	return nil, fmt.Errorf("mongodb driver not supported")
-// }
-
-// connectMongoDB initializes the connection for MongoDB.
-type MongoConn struct {
-	conn *mongo.Client
-}
-
-func connectMongoDB(config DatabaseConfig) (*MongoConn, error) {
-	if config.uri == "" {
+func ConnectToMongoDB(uri string) (*mongo.Client, error) {
+	if uri == "" {
 		return nil, fmt.Errorf("mongodb uri must not be empty")
 	}
-	clientOptions := options.Client().ApplyURI(config.uri)
+	clientOptions := options.Client().ApplyURI(uri)
 
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
@@ -33,6 +23,5 @@ func connectMongoDB(config DatabaseConfig) (*MongoConn, error) {
 		return nil, fmt.Errorf("unable to ping MongoDB for checking connection")
 	}
 
-	conn := &MongoConn{client}
-	return conn, nil
+	return client, nil
 }

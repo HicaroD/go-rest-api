@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	usersH "lego-api-go/internal/controllers/users"
 	"lego-api-go/internal/entity/db"
 	usersS "lego-api-go/internal/services/users"
@@ -28,12 +27,11 @@ func registerAllHandlers(e *echo.Echo) error {
 	e.Logger.Printf("successfuly connected to localDb: %p\n", localDb)
 
 	mongoUri := os.Getenv("MONGODB_URI")
-	mongoDbConfig := nrdm.InitMongoConfig(mongoUri)
-	mongoDb, err := nrdm.Connect(mongoDbConfig)
+	mongoDb, err := nrdm.ConnectToMongoDB(mongoUri)
 	if err != nil {
 		return err
 	}
-	e.Logger.Printf("successfuly connected to mongodb: %p\n", mongoDb.Conn)
+	e.Logger.Printf("successfuly connected to mongodb: %p\n", mongoDb)
 
 	userService := usersS.NewService(localDb)
 	userHandler := &usersH.Handler{UserService: userService}
