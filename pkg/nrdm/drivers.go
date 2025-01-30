@@ -1,7 +1,9 @@
 package nrdm
 
 import (
+	"context"
 	"fmt"
+
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -15,8 +17,7 @@ import (
 func connectMongoDB(config DatabaseConfig) (*mongo.Client, error) {
 	clientOptions := options.Client().ApplyURI(config.uri)
 
-	// Connect to MongoDB
-	client, err := mongo.Connect(nil, clientOptions)
+	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect to MongoDB: %w", err)
 	}
