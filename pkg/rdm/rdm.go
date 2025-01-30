@@ -42,19 +42,3 @@ func (db *Database) AutoMigrate(models ...interface{}) error {
 	}
 	return db.Conn.AutoMigrate(models...)
 }
-
-// // Constructs the DSN string based on the configuration
-// func buildDSN(config DatabaseConfig) (string, error) {
-// 	switch config.Driver {
-// 	case DRIVER_SQLITE:
-// 		return config.DBName, nil
-// 	case DRIVER_MYSQL:
-// 		return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-// 			config.User, config.Password, config.Host, config.Port, config.DBName), nil
-// 	case DRIVER_POSTGRES:
-// 		return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-// 			config.Host, config.Port, config.User, config.Password, config.DBName), nil
-// 	default:
-// 		return "", fmt.Errorf("unsupported driver: %s", config.Driver)
-// 	}
-// }
