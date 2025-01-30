@@ -1,7 +1,9 @@
 package users
 
 import (
+	"fmt"
 	"net/http"
+	"strconv"
 
 	"lego-api-go/pkg/validators"
 
@@ -9,7 +11,7 @@ import (
 )
 
 type GetUserByIdRequestBody struct {
-	ID uint `param:"id" validate:"required"`
+	ID string `param:"id" validate:"required"`
 }
 
 func (h *Handler) GetUserByIdController(ctx echo.Context) error {
@@ -19,19 +21,19 @@ func (h *Handler) GetUserByIdController(ctx echo.Context) error {
 		return err
 	}
 
-	// TODO: conversion of 'id' field to uint does not work properly
-	// If I change to a string, it works.
+	userId, err := strconv.Atoi(req.ID)
+	if err != nil {
+		return err
+	}
 
-	// user, found, err := h.UserService.GetUserById(req.ID)
-	// if err != nil {
-	// 	return err
-	// }
-	//
-	// if !found {
-	// 	return ctx.JSON(http.StatusNotFound, map[string]string{"detail": fmt.Sprintf("User with id %d not found", req.ID)})
-	// }
-	//
-	// return ctx.JSON(http.StatusOK, map[string]any{"user": user.ToJson()})
+	user, found, err := h.UserService.GetUserById(userId)
+	if err != nil {
+		return err
+	}
 
-	return ctx.NoContent(http.StatusOK)
+	if !found {
+		return ctx.JSON(http.StatusNotFound, map[string]string{"detail": fmt.Sprintf("User with id %s not found", req.ID)})
+	}
+
+	return ctx.JSON(http.StatusOK, map[string]any{"user": user})
 }

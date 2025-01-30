@@ -10,7 +10,7 @@ import (
 
 type User struct {
 	gorm.Model
-	ID        uint   `gorm:"primaryKey;autoIncrement"`
+	ID        int    `gorm:"primaryKey;autoIncrement"`
 	Name      string `db:"name"`
 	LastName  string `db:"last_name"`
 	CreatedAt time.Time

@@ -5,7 +5,7 @@ import (
 	"lego-api-go/internal/entity/db"
 )
 
-func (s *user) GetUserById(id uint) (*business.User, bool, error) {
+func (s *user) GetUserById(id int) (*business.User, bool, error) {
 	user := &db.User{ID: id}
 	found := false
 

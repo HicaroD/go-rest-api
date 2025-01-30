@@ -8,7 +8,7 @@ import (
 )
 
 type UserService interface {
-	GetUserById(id uint) (*business.User, bool, error)
+	GetUserById(id int) (*business.User, bool, error)
 	CreateUser(user business.User) (business.User, error)
 }
 
