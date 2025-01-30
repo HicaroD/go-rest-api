@@ -1,16 +1,20 @@
 package server
 
 import (
+	"fmt"
 	usersH "lego-api-go/internal/controllers/users"
 	"lego-api-go/internal/entity/db"
 	usersS "lego-api-go/internal/services/users"
+	"lego-api-go/pkg/nrdm"
 	"lego-api-go/pkg/rdm"
+	"os"
 
 	"github.com/labstack/echo/v4"
 )
 
+// TODO: I need a way to deal with disconnecting stuff before server shutdown
 func registerAllHandlers(e *echo.Echo) error {
-	// TODO: initialize databases, loggers, configuration files and more
+	var err error
 
 	dbConfig := rdm.InitSqliteConfig("local.db")
 	localDb, err := rdm.Connect(dbConfig)
@@ -21,7 +25,15 @@ func registerAllHandlers(e *echo.Echo) error {
 	if err != nil {
 		return err
 	}
-	e.Logger.Printf("localDb: %p\n", localDb)
+	e.Logger.Printf("successfuly connected to localDb: %p\n", localDb)
+
+	mongoUri := os.Getenv("MONGODB_URI")
+	mongoDbConfig := nrdm.InitMongoConfig(mongoUri)
+	mongoDb, err := nrdm.Connect(mongoDbConfig)
+	if err != nil {
+		return err
+	}
+	e.Logger.Printf("successfuly connected to mongodb: %p\n", mongoDb.Conn)
 
 	userService := usersS.NewService(localDb)
 	userHandler := &usersH.Handler{UserService: userService}

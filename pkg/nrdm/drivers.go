@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -14,13 +15,24 @@ import (
 // }
 
 // connectMongoDB initializes the connection for MongoDB.
-func connectMongoDB(config DatabaseConfig) (*mongo.Client, error) {
+type MongoConn struct {
+	conn *mongo.Client
+}
+
+func connectMongoDB(config DatabaseConfig) (*MongoConn, error) {
+	if config.uri == "" {
+		return nil, fmt.Errorf("mongodb uri must not be empty")
+	}
 	clientOptions := options.Client().ApplyURI(config.uri)
 
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		return nil, fmt.Errorf("failed to connect to MongoDB: %w", err)
 	}
+	if err := client.Database("admin").RunCommand(context.TODO(), bson.D{{Key: "ping", Value: 1}}).Err(); err != nil {
+		return nil, fmt.Errorf("unable to ping MongoDB for checking connection")
+	}
 
-	return client, nil
+	conn := &MongoConn{client}
+	return conn, nil
 }

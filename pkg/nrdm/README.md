@@ -17,16 +17,26 @@ import (
 2. Replace the placeholder method:
 
 ```go
-// connectMongoDB initializes the connection for MongoDB.
-func connectMongoDB(config DatabaseConfig) (*mongo.Client, error) {
-    clientOptions := options.Client().ApplyURI(config.uri)
+type MongoConn struct {
+	conn *mongo.Client
+}
 
-    client, err := mongo.Connect(context.TODO(), clientOptions)
-    if err != nil {
-        return nil, fmt.Errorf("failed to connect to MongoDB: %w", err)
-    }
+func connectMongoDB(config DatabaseConfig) (*MongoConn, error) {
+	if config.uri == "" {
+		return nil, fmt.Errorf("mongodb uri must not be empty")
+	}
+	clientOptions := options.Client().ApplyURI(config.uri)
 
-    return client, nil
+	client, err := mongo.Connect(context.TODO(), clientOptions)
+	if err != nil {
+		return nil, fmt.Errorf("failed to connect to MongoDB: %w", err)
+	}
+	if err := client.Database("admin").RunCommand(context.TODO(), bson.D{{Key: "ping", Value: 1}}).Err(); err != nil {
+		return nil, fmt.Errorf("unable to ping MongoDB for checking connection")
+	}
+
+	conn := &MongoConn{client}
+	return conn, nil
 }
 ```
 

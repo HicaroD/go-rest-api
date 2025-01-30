@@ -3,7 +3,7 @@
 # Install 'direnv' package and run 'direnv allow .' in order to load
 # all the environment variables
 
-PORT=
+export PORT=
 
 # https://www.mongodb.com/docs/drivers/go/current/usage-examples/#connection-string
-MONGODB_URI=
+export MONGODB_URI=

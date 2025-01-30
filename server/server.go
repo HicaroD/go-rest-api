@@ -19,5 +19,9 @@ func Start() error {
 	}
 
 	addr := fmt.Sprintf(":%v", cfg.Port)
-	return e.Start(addr)
+	if err := e.Start(addr); err != nil {
+		return err
+	}
+
+	return nil
 }
