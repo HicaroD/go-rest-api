@@ -4,9 +4,9 @@ import (
 	usersH "lego-api-go/internal/controllers/users"
 	"lego-api-go/internal/entity/db"
 	usersS "lego-api-go/internal/services/users"
+	"lego-api-go/pkg/envloader"
 	"lego-api-go/pkg/nrdm"
 	"lego-api-go/pkg/rdm"
-	"os"
 
 	"github.com/labstack/echo/v4"
 )
@@ -26,7 +26,7 @@ func registerAllHandlers(e *echo.Echo) error {
 	}
 	e.Logger.Printf("successfuly connected to localDb: %p\n", localDb)
 
-	mongoUri := os.Getenv("MONGODB_URI")
+	mongoUri := envloader.GetString("MONGODB_URI", "")
 	mongoDb, err := nrdm.ConnectToMongoDB(mongoUri)
 	if err != nil {
 		return err
