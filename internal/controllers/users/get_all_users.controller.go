@@ -7,7 +7,7 @@ import (
 )
 
 func (h *Handler) GetAllUsersController(ctx echo.Context) error {
-	// TODO: call some sort of service here
+	// TODO: call the service here
 
 	// TODO: build a package around it for later usage
 	// cookie := new(http.Cookie)

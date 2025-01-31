@@ -7,3 +7,5 @@ export PORT=
 
 # https://www.mongodb.com/docs/drivers/go/current/usage-examples/#connection-string
 export MONGODB_URI=
+
+export JWT_SECRET=
