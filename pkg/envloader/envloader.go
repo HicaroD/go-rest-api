@@ -1,34 +1,76 @@
 package envloader
 
 import (
+	"errors"
 	"os"
+	"reflect"
 	"strconv"
+	"strings"
 )
 
-// TODO: use package "reflect" for reading field tags from
-// struct and retrieve the environment variables
-//
-// The idea is to be really simple because environment
-// variables are generally strings or integers
+func Parse(config interface{}) error {
+	val := reflect.ValueOf(config).Elem()
+	typ := val.Type()
 
-func GetInt(key string, fallback int) int {
-	valStr, set := os.LookupEnv(key)
-	if !set {
-		return fallback
+	for i := 0; i < val.NumField(); i++ {
+		field := val.Field(i)
+		structField := typ.Field(i)
+
+		tag := structField.Tag.Get("env")
+		if tag == "" {
+			continue
+		}
+
+		envValue := os.Getenv(tag)
+		if envValue == "" {
+			if structField.Tag.Get("required") == "true" {
+				return errors.New("missing required environment variable: " + tag)
+			}
+			continue
+		}
+
+		err := setField(field, envValue, structField.Tag.Get("default"))
+		if err != nil {
+			return err
+		}
 	}
 
-	val, err := strconv.Atoi(valStr)
-	if err != nil {
-		return fallback
-	}
-
-	return val
+	return nil
 }
 
-func GetString(key string, fallback string) string {
-	val, set := os.LookupEnv(key)
-	if !set {
-		return fallback
+func setField(field reflect.Value, value string, defaultValue string) error {
+	if value == "" && defaultValue != "" {
+		value = defaultValue
 	}
-	return val
+
+	switch field.Kind() {
+	case reflect.String:
+		field.SetString(value)
+	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
+		intVal, err := strconv.ParseInt(value, 10, 64)
+		if err != nil {
+			return err
+		}
+		field.SetInt(intVal)
+	case reflect.Bool:
+		boolVal, err := strconv.ParseBool(value)
+		if err != nil {
+			return err
+		}
+		field.SetBool(boolVal)
+	case reflect.Slice:
+		elements := strings.Split(value, ",")
+		slice := reflect.MakeSlice(field.Type(), len(elements), len(elements))
+		for i, el := range elements {
+			err := setField(slice.Index(i), el, "")
+			if err != nil {
+				return err
+			}
+		}
+		field.Set(slice)
+	default:
+		return errors.New("unsupported type: " + field.Type().String())
+	}
+
+	return nil
 }

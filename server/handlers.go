@@ -34,12 +34,12 @@ func registerAllHandlers(e *echo.Echo) error {
 	// }
 	// e.Logger.Printf("successfuly connected to mongodb: %p\n", mongoDb)
 
+	loginHandler := &login.Handler{}
+	loginHandler.RegisterControllers("/login", e)
+
 	userService := usersS.NewService(localDb)
 	userHandler := &usersH.Handler{UserService: userService}
 	userHandler.RegisterControllers("/users", e)
-
-	loginHandler := &login.Handler{}
-	loginHandler.RegisterControllers("/login", e)
 
 	return nil
 }
