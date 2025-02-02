@@ -9,10 +9,7 @@ import (
 
 func GetCookie(ctx echo.Context, name string) (*http.Cookie, bool) {
 	value, err := ctx.Cookie(name)
-	if err != nil {
-		return nil, false
-	}
-	return value, false
+	return value, err == nil
 }
 
 func SetSecureCookie(ctx echo.Context, name, value string, expirationTimeInSeconds int64) {
@@ -22,5 +19,6 @@ func SetSecureCookie(ctx echo.Context, name, value string, expirationTimeInSecon
 	cookie.Expires = time.Unix(expirationTimeInSeconds, 0)
 	cookie.Secure = true
 	cookie.HttpOnly = true
+	cookie.Path = "/"
 	ctx.SetCookie(cookie)
 }

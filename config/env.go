@@ -5,8 +5,12 @@ import "lego-api-go/pkg/envloader"
 // NOTE: "direnv" package is used for loading environment variables
 // Make sure "direnv" in your machine
 
+var CFG *EnvConfig = InitEnvConfig()
+
 type EnvConfig struct {
-	Port int `env:"PORT" required:"true" default:"8080"`
+	Port      int    `env:"PORT" required:"true" default:"8080"`
+	MongoUri  string `env:"MONGODB_URI" required:"true"`
+	JWTSecret string `env:"JWT_SECRET" required:"true"`
 }
 
 func InitEnvConfig() *EnvConfig {
