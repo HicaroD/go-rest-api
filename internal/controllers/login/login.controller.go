@@ -2,6 +2,7 @@ package login
 
 import (
 	"lego-api-go/pkg/cookies"
+	"lego-api-go/pkg/crypt"
 	"lego-api-go/pkg/jwt"
 	"lego-api-go/pkg/validators"
 	"net/http"
@@ -24,15 +25,20 @@ func (h *Handler) LoginController(ctx echo.Context) error {
 		return err
 	}
 
-	// TODO: find username in the database
-	// TODO: compare hashed password to the passed password
-	// TODO: if comparison is true, generate jwt token with user id (only)
-	// TODO: if comparison is false, then unauthorized
-
-	payload := map[string]string{
-		"username": req.Username,
-		"password": req.Password,
+	// TODO: read hashed user password from db
+	hashedPasswordFromDB, _ := crypt.HashPassword(req.Password)
+	if !crypt.ComparePassword(req.Password, hashedPasswordFromDB) {
+		return ctx.JSON(http.StatusUnauthorized, map[string]any{
+			"detail": "invalid credentials",
+		})
 	}
+
+	// TODO: read user data for db and set here
+	payload := map[string]any{
+		"user_id":  10,
+		"is_admin": false,
+	}
+
 	token, err := jwt.GenerateToken(payload, oneWeek)
 	if err != nil {
 		return err
