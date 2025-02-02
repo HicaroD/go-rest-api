@@ -24,11 +24,15 @@ func (h *Handler) LoginController(ctx echo.Context) error {
 		return err
 	}
 
+	// TODO: find username in the database
+	// TODO: compare hashed password to the passed password
+	// TODO: if comparison is true, generate jwt token with user id (only)
+	// TODO: if comparison is false, then unauthorized
+
 	payload := map[string]string{
 		"username": req.Username,
 		"password": req.Password,
 	}
-
 	token, err := jwt.GenerateToken(payload, oneWeek)
 	if err != nil {
 		return err
@@ -36,7 +40,6 @@ func (h *Handler) LoginController(ctx echo.Context) error {
 	cookies.SetSecureCookie(ctx, "jwt_token", token, oneWeek)
 
 	return ctx.JSON(http.StatusOK, map[string]any{
-		"detail": "User logged successfuly",
-		"token":  token,
+		"detail": "User logged in successfuly",
 	})
 }

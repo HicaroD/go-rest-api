@@ -6,7 +6,7 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 )
 
-func GenerateToken(payload map[string]string, expirationTimeInSeconds int64) (string, error) {
+func GenerateToken(payload map[string]any, expirationTimeInSeconds int64) (string, error) {
 	claims := jwt.MapClaims{
 		"exp": expirationTimeInSeconds,
 	}

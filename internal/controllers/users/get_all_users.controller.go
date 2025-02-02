@@ -7,6 +7,6 @@ import (
 )
 
 func (h *Handler) GetAllUsersController(ctx echo.Context) error {
-	// TODO: call the service here
+	// call service
 	return ctx.JSON(http.StatusOK, map[string]string{"Hello from": "GetAllUsersController"})
 }
