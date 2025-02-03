@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"lego-api-go/internal/entity/business"
-	"lego-api-go/legos/validators"
+	"github.com/Viventio/legos/validators"
 
 	"github.com/labstack/echo/v4"
 )

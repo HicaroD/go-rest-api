@@ -3,8 +3,8 @@ package users
 import (
 	"github.com/labstack/echo/v4"
 
+	"github.com/Viventio/legos/jwt"
 	"lego-api-go/internal/services/users"
-	"lego-api-go/legos/jwt"
 )
 
 type Handler struct {

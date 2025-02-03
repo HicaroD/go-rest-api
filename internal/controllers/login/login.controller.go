@@ -1,10 +1,10 @@
 package login
 
 import (
-	"lego-api-go/legos/cookies"
-	"lego-api-go/legos/crypt"
-	"lego-api-go/legos/jwt"
-	"lego-api-go/legos/validators"
+	"github.com/Viventio/legos/cookies"
+	"github.com/Viventio/legos/crypt"
+	"github.com/Viventio/legos/jwt"
+	"github.com/Viventio/legos/validators"
 	"net/http"
 	"time"
 

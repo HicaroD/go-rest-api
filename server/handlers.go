@@ -1,13 +1,11 @@
 package server
 
 import (
+	"github.com/Viventio/legos/rdm"
 	"lego-api-go/internal/controllers/login"
 	usersH "lego-api-go/internal/controllers/users"
 	"lego-api-go/internal/entity/db"
 	usersS "lego-api-go/internal/services/users"
-	// "lego-api-go/pkg/envloader"
-	// "lego-api-go/pkg/nrdm"
-	"lego-api-go/legos/rdm"
 
 	"github.com/labstack/echo/v4"
 )
