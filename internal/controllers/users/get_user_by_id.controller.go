@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"lego-api-go/pkg/validators"
+	"lego-api-go/legos/validators"
 
 	"github.com/labstack/echo/v4"
 )

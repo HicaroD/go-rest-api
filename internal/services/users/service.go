@@ -2,7 +2,7 @@ package users
 
 import (
 	"lego-api-go/internal/entity/business"
-	"lego-api-go/pkg/rdm"
+	"lego-api-go/legos/rdm"
 
 	"gorm.io/gorm"
 )

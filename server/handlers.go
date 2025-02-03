@@ -7,7 +7,7 @@ import (
 	usersS "lego-api-go/internal/services/users"
 	// "lego-api-go/pkg/envloader"
 	// "lego-api-go/pkg/nrdm"
-	"lego-api-go/pkg/rdm"
+	"lego-api-go/legos/rdm"
 
 	"github.com/labstack/echo/v4"
 )

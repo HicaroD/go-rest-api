@@ -4,7 +4,7 @@ import (
 	"github.com/labstack/echo/v4"
 
 	"lego-api-go/internal/services/users"
-	"lego-api-go/pkg/jwt"
+	"lego-api-go/legos/jwt"
 )
 
 type Handler struct {

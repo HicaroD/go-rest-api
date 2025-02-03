@@ -1,6 +1,6 @@
 package config
 
-import "lego-api-go/pkg/envloader"
+import "lego-api-go/legos/envloader"
 
 // NOTE: "direnv" package is used for loading environment variables
 // Make sure "direnv" in your machine

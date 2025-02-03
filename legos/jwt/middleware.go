@@ -1,7 +1,7 @@
 package jwt
 
 import (
-	"lego-api-go/pkg/cookies"
+	"lego-api-go/legos/cookies"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
