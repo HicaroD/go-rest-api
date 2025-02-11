@@ -30,3 +30,6 @@ build
 
 # Local databases
 *.db
+
+# Air
+tmp
