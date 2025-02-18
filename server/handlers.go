@@ -1,16 +1,16 @@
 package server
 
 import (
+	"lego-api-go/internal/login/controllers"
+	userH "lego-api-go/internal/user/controllers"
+	userM "lego-api-go/internal/user/models"
+	userS "lego-api-go/internal/user/services"
+
 	"github.com/Viventio/legos/rdm"
-	"lego-api-go/internal/controllers/login"
-	usersH "lego-api-go/internal/controllers/users"
-	"lego-api-go/internal/entity/db"
-	usersS "lego-api-go/internal/services/users"
 
 	"github.com/labstack/echo/v4"
 )
 
-// TODO: I need a way to deal with disconnecting stuff before server shutdown
 func registerAllHandlers(e *echo.Echo) error {
 	var err error
 
@@ -19,7 +19,7 @@ func registerAllHandlers(e *echo.Echo) error {
 	if err != nil {
 		return err
 	}
-	err = localDb.AutoMigrate(&db.User{})
+	err = localDb.AutoMigrate(&userM.User{})
 	if err != nil {
 		return err
 	}
@@ -35,8 +35,8 @@ func registerAllHandlers(e *echo.Echo) error {
 	loginHandler := &login.Handler{}
 	loginHandler.RegisterControllers("/login", e)
 
-	userService := usersS.NewService(localDb)
-	userHandler := &usersH.Handler{UserService: userService}
+	userService := userS.NewService(localDb)
+	userHandler := &userH.Handler{UserService: userService}
 	userHandler.RegisterControllers("/users", e)
 
 	return nil

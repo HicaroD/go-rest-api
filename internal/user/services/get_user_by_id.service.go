@@ -1,12 +1,12 @@
 package users
 
 import (
-	"lego-api-go/internal/entity/business"
-	"lego-api-go/internal/entity/db"
+	"lego-api-go/internal/user/entity"
+	"lego-api-go/internal/user/models"
 )
 
-func (s *user) GetUserById(id int) (*business.User, bool, error) {
-	user := &db.User{ID: id}
+func (s *user) GetUserById(id int) (*entity.User, bool, error) {
+	user := &models.User{ID: id}
 	found := false
 
 	result := s.DB().First(&user, id)
@@ -19,6 +19,6 @@ func (s *user) GetUserById(id int) (*business.User, bool, error) {
 	}
 
 	found = true
-	usr := user.ToBusiness()
-	return &usr, found, nil
+	usr := user.ToEntity()
+	return usr, found, nil
 }

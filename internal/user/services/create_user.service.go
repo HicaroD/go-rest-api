@@ -1,19 +1,19 @@
 package users
 
 import (
-	"lego-api-go/internal/entity/business"
-	"lego-api-go/internal/entity/db"
+	"lego-api-go/internal/user/entity"
+	"lego-api-go/internal/user/models"
 )
 
-func (s *user) CreateUser(user business.User) (business.User, error) {
+func (s *user) CreateUser(user entity.User) (*entity.User, error) {
 	var err error
 
-	newUser := &db.User{Name: user.Name, LastName: user.LastName}
+	newUser := &models.User{Name: user.Name, LastName: user.LastName}
 	result := s.DB().Create(newUser)
 	err = result.Error
 	if err != nil {
-		return business.User{}, err
+		return nil, err
 	}
 
-	return newUser.ToBusiness(), nil
+	return newUser.ToEntity(), nil
 }

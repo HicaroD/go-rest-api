@@ -1,11 +1,10 @@
 package users
 
 import (
+	"lego-api-go/internal/user/entity"
 	"net/http"
 
-	"lego-api-go/internal/entity/business"
 	"github.com/Viventio/legos/validators"
-
 	"github.com/labstack/echo/v4"
 )
 
@@ -14,8 +13,8 @@ type CreateUserRequestBody struct {
 	LastName string `json:"last_name"  validate:"required"`
 }
 
-func (r CreateUserRequestBody) toUser() business.User {
-	return business.User{
+func (r CreateUserRequestBody) toUser() entity.User {
+	return entity.User{
 		Name:     r.Name,
 		LastName: r.LastName,
 	}

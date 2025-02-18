@@ -4,11 +4,11 @@ import (
 	"github.com/labstack/echo/v4"
 
 	"github.com/Viventio/legos/jwt"
-	"lego-api-go/internal/services/users"
+	user "lego-api-go/internal/user/services"
 )
 
 type Handler struct {
-	UserService users.UserService
+	UserService user.UserService
 }
 
 func (h *Handler) RegisterControllers(prefix string, e *echo.Echo) {

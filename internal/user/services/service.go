@@ -1,15 +1,16 @@
 package users
 
 import (
-	"lego-api-go/internal/entity/business"
+	"lego-api-go/internal/user/entity"
+
 	"github.com/Viventio/legos/rdm"
 
 	"gorm.io/gorm"
 )
 
 type UserService interface {
-	GetUserById(id int) (*business.User, bool, error)
-	CreateUser(user business.User) (business.User, error)
+	GetUserById(id int) (*entity.User, bool, error)
+	CreateUser(user entity.User) (*entity.User, error)
 }
 
 type user struct {
