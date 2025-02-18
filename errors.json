@@ -1,0 +1,14 @@
+[
+  {
+    "name": "UserNotFound",
+    "code": "user_not_found",
+    "message": "User does not exists",
+    "status": 404
+  },
+  {
+    "name": "IDontKnow",
+    "code": "i_dont_know",
+    "message": "I dont know",
+    "status": 500
+  }
+]
