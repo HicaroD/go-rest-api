@@ -8,6 +8,11 @@ GO := go
 all: build
 
 # Run the application
+.PHONY: air
+air:
+	air
+
+# Run the application
 .PHONY: run
 run:
 	$(GO) run $(SRC)/*.go
@@ -68,6 +73,7 @@ env:
 .PHONY: help
 help:
 	@echo "Available targets:"
+	@echo "  air         Run the application with Air for hot reloading"
 	@echo "  run         Run the application"
 	@echo "  build       Build the application binary"
 	@echo "  clean       Remove build artifacts"

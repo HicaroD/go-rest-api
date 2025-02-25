@@ -5,6 +5,7 @@
 - [`Go`](https://go.dev/) (>= 1.23)
 - [`air`](https://github.com/air-verse/air) for hot reloading
 - [`direnv`](https://direnv.net/) for loading environment variables.
+- [`Prettier`](https://prettier.io/) for formatting Markdown, JSON and related files.
 
 ## Installation
 
@@ -22,16 +23,16 @@
   sudo apt-get install direnv # Debian
   ```
 
+- Prettier
+
+  ```bash
+  npm install -g prettier
+  ```
+
 ## Usage
 
-### Run project
+The command below list all possible commands that you might want to use:
 
-```
-air
-```
-
-### Build project
-
-```
-make
+```bash
+make help
 ```
