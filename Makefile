@@ -37,6 +37,7 @@ coverage:
 .PHONY: fmt
 fmt:
 	$(GO) fmt ./...
+	prettier --write .
 
 # Lint the code
 .PHONY: lint
