@@ -7,6 +7,7 @@ import (
 	userS "lego-api-go/internal/user/services"
 
 	"github.com/Viventio/legos/rdm"
+	_ "github.com/Viventio/legos/rdm/drivers/sqlite"
 
 	"github.com/labstack/echo/v4"
 )

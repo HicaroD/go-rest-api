@@ -43,7 +43,7 @@ func (h *Handler) LoginController(ctx echo.Context) error {
 	if err != nil {
 		return err
 	}
-	cookies.SetSecureCookie(ctx, "jwt_token", token, oneWeek)
+	cookies.SetCookie(ctx, "jwt_token", token, true, oneWeek)
 
 	return ctx.JSON(http.StatusOK, map[string]any{
 		"detail": "User logged in successfuly",

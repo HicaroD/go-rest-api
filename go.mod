@@ -3,7 +3,7 @@ module lego-api-go
 go 1.23.4
 
 require (
-	github.com/Viventio/legos v0.0.0-20250203214247-b2031aed8eba
+	github.com/Viventio/legos v0.0.0-20250228151403-2e91891a4da4
 	github.com/labstack/echo/v4 v4.13.3
 	gorm.io/gorm v1.25.12
 )
