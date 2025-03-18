@@ -43,3 +43,9 @@ The command below list all possible commands that you might want to use:
 ```bash
 make help
 ```
+
+## Installing new drivers
+
+```bash
+./scripts/install_driver.sh
+```
