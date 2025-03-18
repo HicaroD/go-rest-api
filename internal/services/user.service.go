@@ -1,7 +1,7 @@
 package services
 
 import (
-	"github.com/Viventio/legos/rdm"
+	"github.com/jmoiron/sqlx"
 	"lego-api-go/internal/entities"
 )
 
@@ -15,14 +15,11 @@ type UserService interface {
 }
 
 type user struct {
-	localDb *rdm.Database
+	db *sqlx.DB
 }
 
-func NewUserService(localDb *rdm.Database) UserService {
+func NewUserService(localDb *sqlx.DB) UserService {
 	return &user{localDb}
-}
-
-func (u *user) DB() {
 }
 
 // ===============================
@@ -30,23 +27,12 @@ func (u *user) DB() {
 // ===============================
 
 func (s *user) GetUserById(id int) (*entities.User, bool, error) {
-	user := &entities.User{ID: id}
-	// found := false
-	//
-	// result := s.DB().First(&user, id)
-	// err := result.Error
-	// if err != nil {
-	// 	return nil, found, err
-	// }
-	// if result.RowsAffected == 0 {
-	// 	return nil, found, nil
-	// }
-	//
-	// found = true
-	// return user, found, nil
+	user := new(entities.User)
 
-	// TODO
-	return user, false, nil
+	query := "SELECT * FROM users WHERE id=?"
+	err := s.db.Get(user, query, id)
+
+	return user, err != nil, err
 }
 
 // ===============================
@@ -54,15 +40,13 @@ func (s *user) GetUserById(id int) (*entities.User, bool, error) {
 // ===============================
 
 func (s *user) CreateUser(user entities.User) (*entities.User, error) {
-	// TODO
-
-	// var err error
 	newUser := &entities.User{Name: user.Name, LastName: user.LastName}
-	// result := s.DB().Create(newUser)
-	// err = result.Error
-	// if err != nil {
-	// 	return nil, err
-	// }
+
+	query := "INSERT INTO users (name, lastName)"
+	res := s.db.MustExec(query, user.Name, user.LastName)
+	if _, err := res.RowsAffected(); err == nil {
+		return nil, err
+	}
 
 	return newUser, nil
 }

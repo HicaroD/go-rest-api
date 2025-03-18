@@ -3,26 +3,30 @@ package server
 import (
 	"lego-api-go/internal/controllers"
 	"lego-api-go/internal/services"
+	"lego-api-go/utils"
 
-	"github.com/Viventio/legos/rdm"
-	_ "github.com/Viventio/legos/rdm/drivers/sqlite"
-
+	"github.com/jmoiron/sqlx"
 	"github.com/labstack/echo/v4"
 )
+
+var DB_CONFIG utils.DBConfig = utils.DBConfig{
+	Driver: "sqlite",
+	DBName: "local.db",
+}
 
 func registerAllHandlers(e *echo.Echo) error {
 	var err error
 
-	dbConfig := rdm.InitSqliteConfig("local.db")
-	localDb, err := rdm.Connect(dbConfig)
+	dbConfig, err := utils.BuildConnectionString(DB_CONFIG)
 	if err != nil {
 		return err
 	}
-	// err = localDb.AutoMigrate(&userM.User{})
-	// if err != nil {
-	// 	return err
-	// }
-	e.Logger.Printf("successfuly connected to localDb: %p\n", localDb)
+
+	db, err := sqlx.Connect(DB_CONFIG.Driver, dbConfig)
+	if err != nil {
+		return err
+	}
+	e.Logger.Printf("successfuly connected to local database: %p\n", db)
 
 	// mongoUri := envloader.GetString("MONGODB_URI", "")
 	// mongoDb, err := nrdm.ConnectToMongoDB(mongoUri)
@@ -34,7 +38,7 @@ func registerAllHandlers(e *echo.Echo) error {
 	loginHandler := &controllers.LoginHandler{}
 	loginHandler.RegisterControllers("/login", e)
 
-	userService := services.NewUserService(localDb)
+	userService := services.NewUserService(db)
 	userHandler := &controllers.UserHandler{UserService: userService}
 	userHandler.RegisterControllers("/users", e)
 
