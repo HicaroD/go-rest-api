@@ -69,20 +69,48 @@ generate:
 env:
 	direnv allow .
 
+.PHONY: migrate-new
+migrate-new:
+	@read -p "Enter migration name: " name; \
+	goose create $$name sql
+
+.PHONY: migrate-up
+migrate-up:
+	goose up
+
+.PHONY: migrate-down
+migrate-down:
+	goose down
+
+.PHONY: migrate-redo
+migrate-redo:
+	goose redo
+
+.PHONY: migrate-status
+status:
+	goose status
+
 # Help menu
 .PHONY: help
 help:
 	@echo "Available targets:"
-	@echo "  air         Run the application with Air for hot reloading"
-	@echo "  run         Run the application"
-	@echo "  build       Build the application binary"
-	@echo "  clean       Remove build artifacts"
-	@echo "  test        Run unit tests"
-	@echo "  coverage    Run tests and generate coverage report"
-	@echo "  fmt         Format the code"
-	@echo "  lint        Lint the code (requires golangci-lint)"
-	@echo "  vet         Run static analysis"
-	@echo "  deps        Install dependencies"
-	@echo "  generate    Run code generation (if applicable)"
-	@echo "  help        Show this help menu"
-
+	@echo "  air               Run the application with Air for hot reloading"
+	@echo "  run               Run the application"
+	@echo "  build             Build the application binary"
+	@echo "  clean             Remove build artifacts"
+	@echo "  test              Run unit tests"
+	@echo "  coverage          Run tests and generate coverage report"
+	@echo "  fmt               Format the code"
+	@echo "  lint              Lint the code (requires golangci-lint)"
+	@echo "  vet               Run static analysis"
+	@echo "  deps              Install dependencies"
+	@echo "  generate          Run code generation (if applicable)"
+	@echo "  help              Show this help menu"
+	@echo "  help              Show this help menu"
+	@echo "  env               Update environment variables (requires direnv)"
+	@echo "  migration-new     Create a new database migration"
+	@echo "  migrate-up        Apply all pending migrations"
+	@echo "  migrate-down      Roll back the last applied migration"
+	@echo "  migrate-redo      Reapply the last migration (down then up)"
+	@echo "  migrate-status    Show migration status"
+	@echo "  help              Show this help menu"

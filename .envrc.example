@@ -9,3 +9,8 @@ export PORT=
 export MONGODB_URI=
 
 export JWT_SECRET=
+
+# Required for Goose to work properly
+export GOOSE_DRIVER="sqlite" # it may be 'postgres' as well
+export GOOSE_DBSTRING="./local.db"
+export GOOSE_MIGRATION_DIR="migrations"
