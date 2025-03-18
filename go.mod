@@ -5,7 +5,6 @@ go 1.23.4
 require (
 	github.com/Viventio/legos v0.0.0-20250228151403-2e91891a4da4
 	github.com/labstack/echo/v4 v4.13.3
-	gorm.io/gorm v1.25.12
 )
 
 require (
@@ -32,4 +31,5 @@ require (
 	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/time v0.8.0 // indirect
 	gorm.io/driver/sqlite v1.5.7 // indirect
+	gorm.io/gorm v1.25.12 // indirect
 )

@@ -1,15 +1,29 @@
-package login
+package controllers
 
 import (
 	"github.com/Viventio/legos/cookies"
 	"github.com/Viventio/legos/crypt"
 	"github.com/Viventio/legos/jwt"
 	"github.com/Viventio/legos/validators"
+	"github.com/labstack/echo/v4"
 	"net/http"
 	"time"
-
-	"github.com/labstack/echo/v4"
 )
+
+// ==========================
+//      LOGIN HANDLER
+// ==========================
+
+type LoginHandler struct{}
+
+func (h *LoginHandler) RegisterControllers(prefix string, e *echo.Echo) {
+	g := e.Group(prefix)
+	g.POST("/", h.LoginController)
+}
+
+// ==========================
+//      LOGIN CONTROLLER
+// ==========================
 
 type LoginRequestBody struct {
 	Username string `json:"username" validate:"required"`
@@ -18,7 +32,7 @@ type LoginRequestBody struct {
 
 var oneWeek int64 = time.Now().AddDate(0, 0, 7).Unix()
 
-func (h *Handler) LoginController(ctx echo.Context) error {
+func (h *LoginHandler) LoginController(ctx echo.Context) error {
 	req := LoginRequestBody{}
 	err := validators.ValidateRequest(ctx, &req)
 	if err != nil {
