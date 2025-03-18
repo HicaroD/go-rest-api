@@ -65,29 +65,35 @@ deps:
 generate:
 	$(GO) generate ./...
 
+# Update all environment variables
 .PHONY: env
 env:
 	direnv allow .
 
+# Add a new migration
 .PHONY: migrate-new
 migrate-new:
 	@read -p "Enter migration name: " name; \
 	goose create $$name sql
 
+# Apply migrations
 .PHONY: migrate-up
 migrate-up:
 	goose up
 
+# Unapply migrations
 .PHONY: migrate-down
 migrate-down:
 	goose down
 
+# Redo migrations
 .PHONY: migrate-redo
 migrate-redo:
 	goose redo
 
+# Retrieve migration status
 .PHONY: migrate-status
-status:
+migrate-status:
 	goose status
 
 # Help menu
