@@ -7,7 +7,16 @@ GO := go
 .PHONY: all
 all: build
 
-# Run the application
+.PHONY: reqs
+reqs:
+	@echo "This command requires the Golang toolchain and npm to be installed and declared on your PATH"
+	go install github.com/swaggo/swag/cmd/swag@latest
+	go get -u github.com/swaggo/echo-swagger
+	go install github.com/pressly/goose/v3/cmd/goose@latest
+	go install github.com/air-verse/air@latest
+	npm install -g prettier
+
+# Run the application with Hot reloading
 .PHONY: air
 air:
 	air
@@ -70,6 +79,20 @@ generate:
 env:
 	direnv allow .
 
+# Start containers
+.PHONY: db-up
+db-up:
+	docker compose up
+
+# Stop containers
+.PHONY: db-down
+db-down:
+	docker compose down
+
+.PHONY: db-purge
+db-purge:
+	docker compose down -v
+
 # Add a new migration
 .PHONY: migrate-new
 migrate-new:
@@ -95,11 +118,17 @@ migrate-redo:
 .PHONY: migrate-status
 migrate-status:
 	goose status
+	
+# Generate Swagger docs
+.PHONY: swag
+swag:
+	./scripts/setup_swagger.sh
 
 # Help menu
 .PHONY: help
 help:
 	@echo "Available targets:"
+	@echo "  reqs              Install all Golang requirements"
 	@echo "  air               Run the application with Air for hot reloading"
 	@echo "  run               Run the application"
 	@echo "  build             Build the application binary"
@@ -114,9 +143,13 @@ help:
 	@echo "  help              Show this help menu"
 	@echo "  help              Show this help menu"
 	@echo "  env               Update environment variables (requires direnv)"
+	@echo "  db-up             Start containers"
+	@echo "  db-down           Stop containers"
+	@echo "  db-purge          Stop containers and remove all volumes (careful!)"
 	@echo "  migration-new     Create a new database migration"
 	@echo "  migrate-up        Apply all pending migrations"
 	@echo "  migrate-down      Roll back the last applied migration"
 	@echo "  migrate-redo      Reapply the last migration (down then up)"
 	@echo "  migrate-status    Show migration status"
+	@echo "  swag              Generate Swagger docs"
 	@echo "  help              Show this help menu"
