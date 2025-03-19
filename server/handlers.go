@@ -1,21 +1,25 @@
 package server
 
 import (
+	"github.com/labstack/echo/v4"
+	"github.com/swaggo/echo-swagger"
 	"lego-api-go/internal/controllers"
 	"lego-api-go/internal/services"
 	"lego-api-go/utils"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/labstack/echo/v4"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 var DB_CONFIG utils.DBConfig = utils.DBConfig{
-	Driver: "sqlite",
-	DBName: "local.db",
+	Driver: "sqlite3",
+	DBName: "local",
 }
 
 func registerAllHandlers(e *echo.Echo) error {
 	var err error
+
+	registerSwaggerHandler(e)
 
 	dbConfig, err := utils.BuildConnectionString(DB_CONFIG)
 	if err != nil {
@@ -43,4 +47,8 @@ func registerAllHandlers(e *echo.Echo) error {
 	userHandler.RegisterControllers("/users", e)
 
 	return nil
+}
+
+func registerSwaggerHandler(e *echo.Echo) {
+	e.GET("/swagger/*", echoSwagger.WrapHandler)
 }

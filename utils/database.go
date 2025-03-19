@@ -14,7 +14,7 @@ type DBConfig struct {
 
 func BuildConnectionString(cfg DBConfig) (string, error) {
 	switch cfg.Driver {
-	case "sqlite":
+	case "sqlite", "sqlite3":
 		return fmt.Sprintf("%s.db", cfg.DBName), nil
 	case "postgres":
 		return fmt.Sprintf(

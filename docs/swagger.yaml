@@ -1,0 +1,8 @@
+host: localhost:8000
+info:
+  contact: {}
+  description: This is the documentation for Lego API REST API.
+  title: Lego API
+  version: "1.0"
+paths: {}
+swagger: "2.0"

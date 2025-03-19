@@ -140,8 +140,6 @@ help:
 	@echo "  vet               Run static analysis"
 	@echo "  deps              Install dependencies"
 	@echo "  generate          Run code generation (if applicable)"
-	@echo "  help              Show this help menu"
-	@echo "  help              Show this help menu"
 	@echo "  env               Update environment variables (requires direnv)"
 	@echo "  db-up             Start containers"
 	@echo "  db-down           Stop containers"
